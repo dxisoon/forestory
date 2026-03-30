@@ -7,7 +7,7 @@ It was built to run locally on XAMPP (Apache, PHP, MySQL), not as a public websi
 ## What you need
 
 - XAMPP or similar (PHP 8+, MySQL).
-- A MySQL database named `tree` (or change it) with the tables the project uses. There is no full SQL dump in this repo; I used a database set up for the assignment.
+- A MySQL database named `tree` (or change it) with the tables the project uses. There is no full SQL dump in this repo. I used a database set up for the assignment.
 
 ## How to run it
 
@@ -24,4 +24,4 @@ It was built to run locally on XAMPP (Apache, PHP, MySQL), not as a public websi
 
 ## License
 
-[MIT](LICENSE). You can change the copyright line in `LICENSE` to your own name if you want.
+[MIT](LICENSE). Built by dxisoon.
