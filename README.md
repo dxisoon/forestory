@@ -1,61 +1,27 @@
 # Forestory
 
-Local demo app for **tropical forest stand generation** and **selective-logging scenarios**. It builds a synthetic stand in MySQL, applies minimum-diameter harvest regimes (45–60 cm), models simple felling damage and 30-year growth, and exposes stand tables, maps, and production charts in the browser.
+A small web app for generating a synthetic forest in a database and running simple selective-logging scenarios. You pick a minimum cutting diameter (regimes 45–60 cm), and the app works out volumes, which trees are cut, rough damage from felling, and a simple 30-year growth step, then shows stand tables and charts.
 
-**Scope:** educational / portfolio / offline XAMPP use. This is not hardened for public hosting without further security work (prepared statements, auth, HTTPS, etc.).
+It was built to run locally on XAMPP (Apache, PHP, MySQL), not as a public website.
 
-## Stack
+## What you need
 
-- PHP 8+ (uses `str_contains` and typed mysqli)
-- MySQL / MariaDB (InnoDB)
-- HTML, CSS, JavaScript (charts and maps)
+- XAMPP or similar (PHP 8+, MySQL).
+- A MySQL database named `tree` (or change it) with the tables the project uses. There is no full SQL dump in this repo; I used a database set up for the assignment.
 
-## Requirements
+## How to run it
 
-- [XAMPP](https://www.apachefriends.org/) (or any Apache + PHP + MySQL stack)
-- A MySQL database (default name `tree`) with the tables this app expects (`speciesnames`, `new_forest`, regime copies, damage tables, etc.). The repository does not ship a full SQL schema; import your own dump if you have one, or mirror structure from an existing install.
+1. Put the folder under `htdocs` (or your web root).
+2. Create the database and tables, or restore from a dump if you have one.
+3. Copy `.env.example` to `.env` and set `DB_HOST`, `DB_USER`, `DB_PASSWORD`, and `DB_NAME`. If you skip `.env`, it defaults to `localhost`, `root`, empty password, and database `tree`.
+4. In the browser, open something like `http://localhost/forestory/index.html`, then use **Generate New Forest** and **Select Regime** from the menu.
 
-## Setup
+## Config files
 
-1. Clone or copy the project under your web root, e.g. `htdocs/forestory`.
-2. Create the MySQL database and tables (see your existing dump or team docs).
-3. **Environment file**
-   - Copy `.env.example` to `.env` in the project root.
-   - Edit `.env` with your MySQL host, user, password, and database name.
-
-   ```ini
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=
-   DB_NAME=tree
-   ```
-
-   If `.env` is missing, the app falls back to the same defaults as above (typical local XAMPP).
-
-4. Open the app in a browser, e.g. `http://localhost/forestory/index.html`.
-
-## Configuration
-
-| File | Role |
-|------|------|
-| `.env` | **Local only.** DB credentials; never commit (see `.gitignore`). |
-| `.env.example` | Template for new clones; safe to commit. |
-| `config/env.php` | Loads `.env` into `getenv()` / `$_ENV`. |
-| `config/database.php` | `forestory_db_connect()` used across the PHP entry points. |
-
-## Using the app (short)
-
-1. **Generate New Forest** — populates `new_forest` and mirrors base columns into `new_forest_50`, `_55`, `_60`.
-2. **Select Regime** — runs calculation (and follow-on scripts) for regime 45 / 50 / 55 / 60.
-3. Explore **Stand Table**, **Final Output**, **Distribution** plots, and **Production Chart** from the sidebar.
-
-## GitHub checklist
-
-- [x] `.env` ignored; `.env.example` committed.
-- [x] No database passwords in tracked PHP files.
-- [ ] Add a SQL schema or migration when you have one to share.
-- [ ] Optional: replace remaining dynamic SQL with prepared statements for production-style hardening.
+- `.env` — your local database settings (not committed).
+- `.env.example` — example only.
+- `config/env.php` and `config/database.php` — load `.env` and open the MySQL connection.
 
 ## License
 
-This project is released under the [MIT License](LICENSE). Replace “Forestory contributors” in the license file with your name if you prefer.
+[MIT](LICENSE). You can change the copyright line in `LICENSE` to your own name if you want.
