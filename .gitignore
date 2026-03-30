@@ -1,0 +1,11 @@
+# Local secrets and environment
+.env
+
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.log
+
+# Optional: if you add Composer later
+/vendor/
